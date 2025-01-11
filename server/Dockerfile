@@ -10,4 +10,5 @@ COPY . .
 
 RUN npm run build 
 
-CMD [ "npm", "run", "start:dev" ]
+# start app and prisma studio on port 5555(default port)
+CMD ["sh", "-c", "npm run start:dev & npm run db:studio"]
