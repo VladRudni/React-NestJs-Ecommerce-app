@@ -1,4 +1,4 @@
-version: "3.8" # Correct Docker Compose version format (avoid using "0.1-a")
+version: "3.8" 
 
 services:
   # Frontend server using React
@@ -29,6 +29,16 @@ services:
 
     restart: always
 
+    develop:
+      watch:
+        - action: rebuild
+          path: ./server/package.json
+        - action: sync
+          path: ./server/src/
+          target: /app/src/
+          ignore:
+            - node_modules/
+
     # Port for connection
     ports:
       - "${BACKEND_PORT}:${BACKEND_PORT}"
@@ -36,7 +46,6 @@ services:
     # Add environment variables
     environment:
       - PORT=${BACKEND_PORT}
-
       # Database variables
       - DATABASE_HOST=${POSTGRES_HOST}
       - DATABASE_PORT=${POSTGRES_PORT}
@@ -53,14 +62,13 @@ services:
 
     # Set shared memory limit when using docker-compose
     shm_size: 128mb
-
     # Set database settings
     environment:
-      POSTGRES_HOST: ${POSTGRES_HOST}
-      POSTGRES_PORT: ${POSTGRES_PORT}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+    ports:
+      - "5432:5432"
 
     # Get db files in folder
     volumes:
