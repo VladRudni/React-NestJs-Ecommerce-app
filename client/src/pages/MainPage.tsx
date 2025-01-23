@@ -1,3 +1,9 @@
+import { Layout } from "../componets/Layout";
+
 export const MainPage = () => {
-  return <div>MainPage</div>;
+  return (
+    <Layout>
+      <h1>main page</h1>
+    </Layout>
+  );
 };
