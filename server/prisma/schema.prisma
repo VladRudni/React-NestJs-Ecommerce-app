@@ -1,11 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["native", "linux-arm64-openssl-3.0.x"]
 }
 
@@ -14,15 +8,53 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Product {
-  id String @id @default(uuid())
-
-  name String
-  price Int
-  shortDescripiton String
-
+model User {
+  id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  firstname String
+  lastName  String?
+  email     String  @unique()
+  password  String
+  basket    Basket?
+
+  @@map("users")
+}
+
+model Basket {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  products Product[]
+  userId   String    @unique
+  user     User      @relation(fields: [userId], references: [id])
+
+  @@map("baskets")
+}
+
+model Product {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name             String
+  price            Int
+  shortDescription String?
+  categories       Category[]
+  baskets          Basket[]
+
   @@map("products")
+}
+
+model Category {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name     String
+  products Product[]
+
+  @@map("categories")
 }
