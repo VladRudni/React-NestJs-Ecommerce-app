@@ -1,7 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { Prisma } from 'prisma/generated';
 
-export class UpdateUserDto {
+export class UpdateUserDto implements Prisma.UserUpdateInput {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
@@ -15,9 +16,4 @@ export class UpdateUserDto {
   @IsEmail()
   @IsNotEmpty()
   email: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @MinLength(8)
-  password: string;
 }

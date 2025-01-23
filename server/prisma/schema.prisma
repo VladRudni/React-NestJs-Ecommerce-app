@@ -42,6 +42,7 @@ model Product {
 
   name             String
   price            Int
+  images           String[]
   shortDescription String?
   categories       Category[]
   baskets          Basket[]

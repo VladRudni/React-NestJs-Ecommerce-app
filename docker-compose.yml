@@ -65,6 +65,7 @@ services:
     volumes:
       # Sync prisma client with docker compose prisma client
       - ./server/prisma/generated:/app/prisma/generated
+      - ./server/uploads:/app/uploads
 
   # Database server using PostgreSQL
   db:
