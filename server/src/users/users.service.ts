@@ -10,16 +10,18 @@ export class UsersService {
     return await this.prismaServise.user.findFirst({ where: { email: email } });
   }
 
-  async create(dto: CreateUserDto) {
-    const isUserExist = this.findByEmail(dto.email);
+  async create(createUserDto: CreateUserDto) {
+    const isUserExist = this.findByEmail(createUserDto.email);
 
     if (isUserExist) {
-      return new BadRequestException('A user with this email already exists');
+      return new BadRequestException('A user with this email already exists.');
     }
 
     const user = await this.prismaServise.user.create({
-      data: { ...dto, basket: {} },
+      data: { ...createUserDto, basket: {} },
     });
     return user;
   }
+
+  async updateUser() {}
 }
