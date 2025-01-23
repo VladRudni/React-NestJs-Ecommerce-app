@@ -1,0 +1,21 @@
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { ApiOperation } from '@nestjs/swagger';
+import { CreateUserDto } from 'src/users/dto/create-user.dto';
+import { UsersService } from 'src/users/users.service';
+
+@Controller('users')
+export class UsersController {
+  constructor(private readonly userService: UsersService) {}
+
+  @ApiOperation({ summary: 'find user by email.' })
+  @Get('findByEmail/:email')
+  findByEmail(@Param('email') email: string) {
+    return this.userService.findByEmail(email);
+  }
+
+  @ApiOperation({ summary: 'create new user.' })
+  @Post()
+  create(@Body() dto: CreateUserDto) {
+    return this.userService.create(dto);
+  }
+}

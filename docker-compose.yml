@@ -1,0 +1,96 @@
+version: "3.7"
+
+services:
+  # Frontend server using React
+
+  web:
+    build: ./client
+    restart: always
+    container_name: react
+    env_file:
+      - .project.env
+
+    ports:
+      - "${WEB_PORT}:3000"
+    environment:
+      - BACKEND_URL=http://backend:${BACKEND_PORT}
+    develop:
+      watch:
+        - action: rebuild
+          path: ./client/package.json
+        - action: sync
+          path: ./client/src/
+          target: /app/src/
+          ignore:
+            - node_modules/
+    depends_on:
+      - backend
+
+  # Backend server using NestJS for creating server
+  backend:
+    # Path to Dockerfile for backend server
+    build: ./server
+
+    container_name: nestJs
+    restart: always
+    env_file:
+      - .project.env
+
+    develop:
+      watch:
+        - action: rebuild
+          path: ./server/package.json
+        - action: sync
+          path: ./server/src/
+          target: /app/src/
+          ignore:
+            - node_modules/
+
+    # Port for connection
+    ports:
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
+      - "5555:5555"
+
+    # Add environment variables
+    environment:
+      - PORT=${BACKEND_PORT}
+      # Database variables
+      - DATABASE_HOST=${POSTGRES_HOST}
+      - DATABASE_PORT=${POSTGRES_PORT}
+      - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
+      - DATABASE_USER=${POSTGRES_USER}
+      - DATABASE_DB=${POSTGRES_DB}
+
+    depends_on:
+      - db
+    volumes:
+      # Sync prisma client with docker compose prisma client
+      - ./server/node_modules/.prisma:/app/node_modules/.prisma
+
+  # Database server using PostgreSQL
+  db:
+    image: postgres:latest
+    container_name: postgres
+    restart: always
+    env_file:
+      - .project.env
+
+    # Set shared memory limit when using docker-compose
+    shm_size: 128mb
+    # Set database settings
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: shop
+
+    ports:
+      - "5432:5432"
+
+    # Get db files in folder
+    volumes:
+      - ./database:/var/lib/postgresql/data
+
+# Volumes
+volumes:
+  database:
+    driver: local
