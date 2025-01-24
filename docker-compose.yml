@@ -55,7 +55,6 @@ services:
     environment:
       - PORT=${BACKEND_PORT}
       # Database variables
-      - DATABASE_HOST=${POSTGRES_HOST}
       - DATABASE_PORT=${POSTGRES_PORT}
       - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
       - DATABASE_USER=${POSTGRES_USER}
@@ -65,7 +64,8 @@ services:
       - db
     volumes:
       # Sync prisma client with docker compose prisma client
-      - ./server/node_modules/.prisma:/app/node_modules/.prisma
+      - ./server/prisma/generated:/app/prisma/generated
+      - ./server/uploads:/app/uploads
 
   # Database server using PostgreSQL
   db:

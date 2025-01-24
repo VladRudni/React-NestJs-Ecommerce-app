@@ -1,4 +1,9 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  forwardRef,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
 import * as bcrypt from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from 'src/users/users.service';
@@ -8,8 +13,9 @@ import { RegisterDto } from './dto/register.dto';
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly jwtService: JwtService,
+    @Inject(forwardRef(() => UsersService))
     private readonly usersService: UsersService,
+    private readonly jwtService: JwtService,
   ) {}
 
   async register(registerDto: RegisterDto) {
@@ -21,12 +27,12 @@ export class AuthService {
 
     const hashPassword = await bcrypt.hash(registerDto.password, 5);
 
-    const user = this.usersService.create({
+    const user = await this.usersService.create({
       ...registerDto,
       password: hashPassword,
     });
 
-    return this.generateToken(user);
+    return await this.generateToken(user);
   }
 
   async login(loginDto: LoginDto) {
@@ -44,6 +50,12 @@ export class AuthService {
     throw new BadRequestException('Incorrect e-mail or password');
   }
 
+  async decodeToken(token: string) {
+    return await this.jwtService.verify(token, {
+      secret: process.env.JWT_SECRET,
+    });
+  }
+
   private async generateToken(user) {
     const data = {
       firstName: user.firstname,
@@ -51,7 +63,7 @@ export class AuthService {
       email: user.email,
     };
     return {
-      token: await this.jwtService.sign(data),
+      token: this.jwtService.sign(data),
     };
   }
 }

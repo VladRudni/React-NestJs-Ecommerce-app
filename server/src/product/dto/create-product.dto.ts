@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Prisma } from '@prisma/client';
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { Prisma } from 'prisma/generated';
 
 export class CreateProductDto implements Prisma.ProductCreateInput {
   @ApiProperty()
@@ -15,5 +15,5 @@ export class CreateProductDto implements Prisma.ProductCreateInput {
 
   @ApiProperty()
   @IsString()
-  shortDescripiton?: string;
+  shortDescription?: string;
 }
