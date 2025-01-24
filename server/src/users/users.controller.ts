@@ -21,6 +21,11 @@ export class UsersController {
   findByEmail(@Param('email') email: string) {
     return this.userService.findByEmail(email);
   }
+  @ApiOperation({ summary: 'get user by token' })
+  @Get('/get-user/:token')
+  getByToken(@Param('token') token: string) {
+    return this.userService.getUserByToken(token);
+  }
 
   @ApiOperation({ summary: 'create new user.' })
   @Post()

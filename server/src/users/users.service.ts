@@ -1,18 +1,39 @@
 import {
   BadRequestException,
+  forwardRef,
+  Inject,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { User } from 'prisma/generated';
+import { AuthService } from 'src/auth/auth.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { UpdateUserDto } from 'src/users/dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly prismaServise: PrismaService) {}
+  constructor(
+    @Inject(forwardRef(() => AuthService))
+    private readonly authService: AuthService,
+    private readonly prismaServise: PrismaService,
+  ) {}
 
   async findByEmail(email: string) {
     return await this.prismaServise.user.findFirst({ where: { email: email } });
+  }
+
+  async getUserByToken(token: string) {
+    if (!token) throw new BadRequestException('You dont send a token');
+
+    const decodeToken: User = await this.authService.decodeToken(token);
+
+    if (!decodeToken) {
+      throw new BadRequestException('You token dont valide or his time out.');
+    }
+
+    const user = this.findByEmail(decodeToken.email);
+    return user;
   }
 
   async create(createUserDto: CreateUserDto) {
