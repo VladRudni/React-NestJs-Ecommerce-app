@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
+import { GetUserDto } from 'src/users/dto/get-user.dto';
 import { UpdateUserDto } from 'src/users/dto/update-user.dto';
 import { UsersService } from 'src/users/users.service';
 
@@ -21,10 +22,11 @@ export class UsersController {
   findByEmail(@Param('email') email: string) {
     return this.userService.findByEmail(email);
   }
+
   @ApiOperation({ summary: 'get user by token' })
-  @Get('/get-user/:token')
-  getByToken(@Param('token') token: string) {
-    return this.userService.getUserByToken(token);
+  @Post('/get-user/')
+  getByToken(@Body() getUserDto: GetUserDto) {
+    return this.userService.getUserByToken(getUserDto.token);
   }
 
   @ApiOperation({ summary: 'create new user.' })

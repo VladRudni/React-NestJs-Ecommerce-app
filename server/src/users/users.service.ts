@@ -24,15 +24,21 @@ export class UsersService {
   }
 
   async getUserByToken(token: string) {
-    if (!token) throw new BadRequestException('You dont send a token');
+    if (!token) return { message: 'you dont send a token ' };
 
-    const decodeToken: User = await this.authService.decodeToken(token);
+    let decodeToken;
 
-    if (!decodeToken) {
-      throw new BadRequestException('You token dont valide or his time out.');
+    try {
+      decodeToken = await this.authService.decodeToken(token);
+    } catch (error) {
+      return { message: 'Your token is invalid' };
     }
 
-    const user = this.findByEmail(decodeToken.email);
+    const user = await this.findByEmail(decodeToken.email);
+    if (!user) {
+      throw new NotFoundException('Your token is invalid');
+    }
+
     return user;
   }
 

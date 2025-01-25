@@ -1,6 +1,4 @@
 import { makeAutoObservable } from "mobx";
-import { getUserByToken } from "../api/userApi";
-import { toast } from "react-toastify";
 
 export interface IUser {
   firstname: string;
@@ -12,7 +10,8 @@ class User {
   firstName: string = "";
   lastName: string = "";
   email: string = "";
-  token: string = "";
+  token: string =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJWbGFkdXNsYXYiLCJsYXN0TmFtZSI6IlJ1ZG5pdHNraXkiLCJlbWFpbCI6InJ1ZG5pMjIyMDIwQGdtYWlsLmNvbSIsImlhdCI6MTczNzgzNTU4MiwiZXhwIjoxNzM3OTIxOTgyfQ.WxdaXq6WhIZSiBO956Iq5ESfx10pK6Vm9VolVhtKuCM";
 
   constructor() {
     makeAutoObservable(this);
@@ -25,23 +24,9 @@ class User {
   }
 
   async tryGetUser() {
-    try {
-      getUserByToken(this.token)
-        .then((data: IUser) => {
-          if (!data) {
-            return toast("you not auth");
-          }
-          console.log(data);
-          this.setUser(data);
-        })
-        .catch((error) => {
-          console.error(`error: ${error}`);
-          return toast("failed connect to database");
-        });
-    } catch (error) {
-      console.error(error);
-    }
+    if (!this.token) return;
   }
 }
 
-export default new User();
+const UserStore = new User();
+export default UserStore;
