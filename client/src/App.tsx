@@ -3,6 +3,7 @@ import { AppRouter } from "./routers/AppRouter";
 import { ToastContainer } from "react-toastify";
 import { useEffect } from "react";
 import UserStore from "./store/userStore";
+import "./scss/global.scss";
 
 const App = () => {
   useEffect(() => {
@@ -11,7 +12,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <AppRouter />
-      <ToastContainer />
+      <ToastContainer position="bottom-right" />
     </BrowserRouter>
   );
 };

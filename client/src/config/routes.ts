@@ -2,6 +2,7 @@ export const routes = {
   home: "/",
   about: "/about",
   shop: "/shop",
+  contacts: "/contacts",
   product: "/product/:productId",
   auth: {
     login: "auth/login",
@@ -11,6 +12,7 @@ export const routes = {
     account: `account/:dashboardSection`,
     backet: "/basket",
     chekout: "/chekout",
+    wishlist: "/wishlist",
   },
   privateRoutes: {},
 };

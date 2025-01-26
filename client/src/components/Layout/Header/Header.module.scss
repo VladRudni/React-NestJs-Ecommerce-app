@@ -1,3 +1,60 @@
+@import "../../../scss/variables.scss";
+
 .header {
-  width: 100vw;
+  width: 100dvw;
+  position: sticky;
+  top: 0;
+  border-bottom: 1px solid $black;
+  padding-top: 4rem;
+  padding-bottom: 1.6rem;
+
+  &__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.header__logo {
+  a {
+    font-size: 2.4rem;
+    font-weight: bold;
+  }
+}
+
+.header__menu {
+  ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 4.8rem;
+    li {
+      a {
+        position: relative;
+        padding-bottom: 0.2rem;
+        &::after {
+          content: "";
+          width: 0%;
+          height: 0.1rem;
+          background: $text;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          transition: width 0.3s ease;
+        }
+
+        &:hover {
+          &::after {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+.header__tools {
+  display: flex;
+  align-items: center;
+  gap: 2.4rem;
 }

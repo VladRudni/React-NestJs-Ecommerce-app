@@ -2,6 +2,8 @@ import { FC, ReactNode } from "react";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 
+import styles from "./Layout.module.scss";
+
 interface ILayout {
   children: ReactNode;
   header?: boolean;
@@ -10,7 +12,7 @@ interface ILayout {
 
 export const Layout: FC<ILayout> = ({
   children,
-  footer = true,
+  footer = false,
   header = true,
 }) => {
   return (
