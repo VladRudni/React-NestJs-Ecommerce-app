@@ -14,7 +14,7 @@ export const Layout: FC<ILayout> = ({
   header = true,
 }) => {
   return (
-    <div className="wrapper">
+    <div>
       {header ? <Header /> : ""}
       <main>{children}</main>
       {footer ? <Footer /> : ""}

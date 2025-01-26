@@ -1,0 +1,9 @@
+:root {
+  --primary: #fff;
+  --secondary: #000;
+
+  --main-background: var(--primary);
+}
+
+$primary: var(--primary);
+$secondary: var(--secondary);

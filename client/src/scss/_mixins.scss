@@ -1,0 +1,7 @@
+@import "./_screens.scss";
+
+@mixin inPhone() {
+  @media (max-width: $md) {
+    @content;
+  }
+}
