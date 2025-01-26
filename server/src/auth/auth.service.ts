@@ -10,6 +10,11 @@ import { UsersService } from 'src/users/users.service';
 import { LoginDto } from 'src/auth/dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 
+export interface TokenData {
+  firstName: string;
+  lastName: string;
+  email: string;
+}
 @Injectable()
 export class AuthService {
   constructor(
@@ -57,7 +62,7 @@ export class AuthService {
   }
 
   private async generateToken(user) {
-    const data = {
+    const data: TokenData = {
       firstName: user.firstname,
       lastName: user.lastName,
       email: user.email,
