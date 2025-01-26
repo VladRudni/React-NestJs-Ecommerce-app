@@ -1,0 +1,40 @@
+// VARS
+:root {
+  // tools
+  --index: calc(1vw + 1vh);
+
+  // colors
+  --accent: #3d3d3d;
+  --secondary: #50935e;
+
+  --text: var(--accent);
+  --background: var(--white);
+
+  --black: #000;
+  --white: #fff;
+
+  // transitions
+  --tr-1: cubic-bezier(0, 0.95, 0, 0.97);
+}
+// body.darkmode--activated {
+//   --text: #fff;
+//   --background: #100d18;
+// }
+
+// ==============
+// scss vars
+
+// tools
+$index: var(--index);
+// colors
+$accent: var(--accent);
+$secondary: var(--secondary);
+
+$text: var(--text);
+$background: var(--background);
+
+$white: var(--white);
+$black: var(--black);
+
+// transitions
+$tr-1: var(--tr-1);

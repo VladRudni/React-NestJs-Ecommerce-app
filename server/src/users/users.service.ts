@@ -5,8 +5,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { User } from 'prisma/generated';
-import { AuthService } from 'src/auth/auth.service';
+import { AuthService, type TokenData } from 'src/auth/auth.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { UpdateUserDto } from 'src/users/dto/update-user.dto';
@@ -24,21 +23,17 @@ export class UsersService {
   }
 
   async getUserByToken(token: string) {
-    if (!token) return { message: 'you dont send a token ' };
+    if (!token) return null;
 
-    let decodeToken;
+    let userData: TokenData;
 
     try {
-      decodeToken = await this.authService.decodeToken(token);
-    } catch (error) {
-      return { message: 'Your token is invalid' };
+      userData = await this.authService.decodeToken(token);
+    } catch {
+      return null;
     }
 
-    const user = await this.findByEmail(decodeToken.email);
-    if (!user) {
-      throw new NotFoundException('Your token is invalid');
-    }
-
+    const user = this.findByEmail(userData.email);
     return user;
   }
 

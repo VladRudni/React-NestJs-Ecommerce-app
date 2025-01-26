@@ -1,0 +1,20 @@
+:root {
+  --accent: #db4444;
+  --secondary: #000000;
+
+  --main-background: var(--primary);
+
+  --white: #ffffff;
+  --black: #000000;
+
+  --text-gray: #7d8184;
+}
+
+$background: var(--white);
+$text: var(--black);
+$text-gray: var(--text-gray);
+
+$black: var(--black);
+
+$accent: var(--accent);
+$secondary: var(--secondary);
