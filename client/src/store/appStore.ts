@@ -2,6 +2,7 @@ import { makeAutoObservable } from "mobx";
 
 class App {
   IsAuth: boolean = false;
+  containerEnable: boolean = true;
 
   constructor() {
     makeAutoObservable(this);

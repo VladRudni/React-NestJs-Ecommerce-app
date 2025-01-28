@@ -1,0 +1,18 @@
+.hero {
+  display: grid;
+  grid-template-columns: 25% 1fr;
+}
+
+.hero__categories {
+  border-right: 1px solid black;
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1.9rem;
+    font-size: 1.9rem;
+    font-weight: 400;
+    padding-top: 4rem;
+  }
+}
+.hero__slider {
+}

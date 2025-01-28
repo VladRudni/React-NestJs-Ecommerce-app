@@ -4,6 +4,8 @@ import { MainPage } from "../pages/MainPage";
 import { routes } from "../config/routes";
 import { NotFoundPage } from "../pages/404";
 import { AuthPage } from "../pages/AuthPage";
+import { ContactPage } from "../pages/ContactPage";
+import { BasketPage } from "../pages/BasketPage";
 
 export const AppRouter = () => {
   return (
@@ -15,6 +17,13 @@ export const AppRouter = () => {
         path={routes.auth.register}
         element={<AuthPage typePage="register" />}
       />
+
+      <Route path={routes.contacts} element={<ContactPage />} />
+      <Route
+        path={routes.auth.register}
+        element={<AuthPage typePage="register" />}
+      />
+      <Route path={routes.clientRoutes.basket} element={<BasketPage />} />
       {/* if not found. */}
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

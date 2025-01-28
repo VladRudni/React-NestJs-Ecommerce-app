@@ -2,15 +2,15 @@ import { FC, ReactNode } from "react";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 
-import styles from "./Layout.module.scss";
+import { Container } from "./Container";
 
-interface ILayout {
+interface Layout {
   children: ReactNode;
   header?: boolean;
   footer?: boolean;
 }
 
-export const Layout: FC<ILayout> = ({
+export const Layout: FC<Layout> = ({
   children,
   footer = false,
   header = true,
@@ -18,7 +18,9 @@ export const Layout: FC<ILayout> = ({
   return (
     <div>
       {header ? <Header /> : ""}
-      <main>{children}</main>
+      <main>
+        <Container>{children}</Container>
+      </main>
       {footer ? <Footer /> : ""}
     </div>
   );

@@ -5,12 +5,12 @@ export const routes = {
   contacts: "/contacts",
   product: "/product/:productId",
   auth: {
-    login: "auth/login",
-    register: "auth/register",
+    login: "/auth/login",
+    register: "/auth/register",
   },
   clientRoutes: {
-    account: `account/:dashboardSection`,
-    backet: "/basket",
+    account: `/account/:dashboardSection`,
+    basket: "/basket",
     chekout: "/chekout",
     wishlist: "/wishlist",
   },
