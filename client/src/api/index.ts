@@ -3,8 +3,6 @@ import { toast } from "react-toastify";
 
 export const BACKEND_URL = process.env.REACT_APP_BACKCEND_URL;
 
-// const token = UserStore.token;
-
 export const PublicApi = axios.create({
   baseURL: BACKEND_URL,
 });

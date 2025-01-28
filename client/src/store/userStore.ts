@@ -23,8 +23,8 @@ class UserStore {
     if (!this.token) return;
 
     try {
-      const data = await AuthService.getUserByToken(this.token);
-      const user = data.data;
+      const { data } = await AuthService.getUserByToken(this.token);
+      const user = data;
       if (!user) {
         return;
       }
