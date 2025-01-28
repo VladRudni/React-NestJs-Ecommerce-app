@@ -1,9 +1,9 @@
 import AuthService from "../services/AuthService";
 import UserStore from "../store/userStore";
-import { ILoginDto } from "../types/auth.types";
+import { LoginDto } from "../types/auth.types";
 
 export const useAuth = () => {
-  function login(loginDto: ILoginDto) {
+  function login(loginDto: LoginDto) {
     AuthService.login({
       email: loginDto.email,
       password: loginDto.password,

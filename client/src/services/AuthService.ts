@@ -1,15 +1,15 @@
 import { AxiosResponse } from "axios";
 import { PublicApi } from "../api";
-import { IUser } from "../types/user.types";
-import { ILoginDto, ILoginResponse } from "../types/auth.types";
+import { User } from "../types/user.types";
+import { LoginDto, LoginResponse } from "../types/auth.types";
 
 class AuthService {
-  getUserByToken(token: string): Promise<AxiosResponse<IUser>> {
-    return PublicApi.post<IUser>("users/get-user/", { token: token });
+  getUserByToken(token: string): Promise<AxiosResponse<User>> {
+    return PublicApi.post<User>("users/get-user/", { token: token });
   }
 
-  login(loginDto: ILoginDto): Promise<AxiosResponse<ILoginResponse>> {
-    return PublicApi.post<ILoginResponse>("auth/login/", {
+  login(loginDto: LoginDto): Promise<AxiosResponse<LoginResponse>> {
+    return PublicApi.post<LoginResponse>("auth/login/", {
       email: loginDto.email,
       password: loginDto.password,
     });

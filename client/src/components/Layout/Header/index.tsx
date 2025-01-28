@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import styles from "./Header.module.scss";
 import { routes } from "../../../config/routes";
 import { CartIcon } from "../../../assets/icon/cart";
-import { WishList } from "../../../assets/icon/wishlist";
+import WhishLisyIcon from "../../../assets/icon/wishlist.svg";
 import { Container } from "../Container";
 
 export const Header = () => {
@@ -31,9 +31,9 @@ export const Header = () => {
           </nav>
           <div className={styles.header__tools}>
             <Link to={routes.clientRoutes.wishlist}>
-              <WishList />
+              <img src={WhishLisyIcon} alt="asdkm" />
             </Link>
-            <Link to={routes.clientRoutes.backet}>
+            <Link to={routes.clientRoutes.basket}>
               <CartIcon />
             </Link>
           </div>

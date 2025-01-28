@@ -1,9 +1,9 @@
 import { makeAutoObservable } from "mobx";
 import AuthService from "../services/AuthService";
 import { catchError } from "../api";
-import { IUser } from "../types/user.types";
+import { User } from "../types/user.types";
 
-class User {
+class UserStore {
   firstName: string = "";
   lastName: string = "";
   email: string = "";
@@ -13,7 +13,7 @@ class User {
     makeAutoObservable(this);
   }
 
-  setUser(user: IUser) {
+  setUser(user: User) {
     this.firstName = user.firstname;
     this.lastName = user.lastName;
     this.email = user.email;
@@ -35,5 +35,4 @@ class User {
   }
 }
 
-const UserStore = new User();
-export default UserStore;
+export default new UserStore();
