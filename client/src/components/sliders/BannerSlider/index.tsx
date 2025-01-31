@@ -4,13 +4,13 @@ import "swiper/css";
 import "swiper/css/pagination";
 import styles from "./Banner-slider.module.scss";
 
-export interface Slide {
+export interface BannerSlide {
   img: string;
   link?: string;
 }
 
 interface BannerSliderProps {
-  slides: Slide[];
+  slides: BannerSlide[];
 }
 
 export const BannerSlider = ({ slides }: BannerSliderProps) => {

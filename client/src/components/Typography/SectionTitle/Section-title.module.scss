@@ -1,0 +1,24 @@
+@import "../.././../scss/variables.scss";
+
+.section__title {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  margin-top: 7rem;
+
+  &::before {
+    content: "";
+    width: 2rem;
+    height: 4rem;
+    background: $accent;
+    border-radius: 0.4rem;
+  }
+}
+
+.section__title h3 {
+  color: $accent;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0;
+}

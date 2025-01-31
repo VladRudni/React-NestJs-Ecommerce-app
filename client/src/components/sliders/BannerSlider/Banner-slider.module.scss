@@ -1,4 +1,5 @@
-@import "../../scss/variables.scss";
+@import "../../../scss/variables.scss";
+@import "../../../scss/mixins.scss";
 
 .banner {
   margin-left: 4.5rem;
@@ -6,6 +7,13 @@
   overflow: hidden;
   width: 100%;
   position: relative;
+
+  @include inPhone {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+  }
 }
 
 .banner__items {

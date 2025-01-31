@@ -16,3 +16,12 @@
     color: $accent;
   }
 }
+
+// position
+
+.button.center {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 100rem;
+}
