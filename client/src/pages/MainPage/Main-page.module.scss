@@ -1,18 +1,20 @@
-.hero {
-  display: grid;
-  grid-template-columns: 25% 1fr;
-}
+@import "../../scss/mixins.scss";
 
 .hero__categories {
   border-right: 1px solid black;
+  @include inPhone {
+    border: none;
+  }
   ul {
     display: flex;
     flex-direction: column;
-    gap: 1.9rem;
-    font-size: 1.9rem;
+    gap: 1.6rem;
+    font-size: 1.8rem;
     font-weight: 400;
     padding-top: 4rem;
+
+    @include inPhone {
+      align-items: center;
+    }
   }
-}
-.hero__slider {
 }

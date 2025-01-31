@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import AuthService from "../services/AuthService";
 import { catchError } from "../api";
 import { User } from "../types/user.types";
@@ -28,7 +28,9 @@ class UserStore {
       if (!user) {
         return;
       }
-      this.setUser(user);
+      runInAction(() => {
+        this.setUser(user);
+      });
     } catch (error) {
       catchError(error);
     }

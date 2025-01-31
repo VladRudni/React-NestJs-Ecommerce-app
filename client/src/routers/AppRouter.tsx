@@ -6,6 +6,7 @@ import { NotFoundPage } from "../pages/404";
 import { AuthPage } from "../pages/AuthPage";
 import { ContactPage } from "../pages/ContactPage";
 import { BasketPage } from "../pages/BasketPage";
+import { ProductPage } from "../pages/ProductPage";
 
 export const AppRouter = () => {
   return (
@@ -17,6 +18,7 @@ export const AppRouter = () => {
         path={routes.auth.register}
         element={<AuthPage typePage="register" />}
       />
+      <Route path={routes.product} element={<ProductPage />} />
 
       <Route path={routes.contacts} element={<ContactPage />} />
       <Route
