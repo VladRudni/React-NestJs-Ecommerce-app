@@ -6,8 +6,8 @@ import { observer } from "mobx-react-lite";
 
 import styles from "./Main-page.module.scss";
 import { BannerSlider, Slide } from "../../components/BannerSlider";
-
 import BannerImage from "../../assets/banner.png";
+import { CCol, CRow } from "@coreui/bootstrap-react";
 
 export const MainPage = observer(() => {
   const slides: Slide[] = [
@@ -22,12 +22,14 @@ export const MainPage = observer(() => {
   return (
     <Layout>
       <section className={styles.hero}>
-        <div className={styles.hero__categories}>
-          <CategoriesList categories={categoryStore.categories} />
-        </div>
-        <div className={styles.hero__slider}>
-          <BannerSlider slides={slides} />
-        </div>
+        <CRow>
+          <CCol xs={3} className={styles.hero__categories}>
+            <CategoriesList categories={categoryStore.categories} />
+          </CCol>
+          <CCol xs={9} className={styles.hero__slider}>
+            <BannerSlider slides={slides} />
+          </CCol>
+        </CRow>
       </section>
     </Layout>
   );
